@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>資産形成シミュレーター</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="simulator.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header><span class="eyebrow">未来の資産を、見えるかたちに</span><h1>資産形成シミュレーター</h1><p>毎月の積み立てから、目標までの道のりを確認しましょう。</p></header>
+    <div class="layout">
+      <section class="card inputs" aria-labelledby="input-title">
+        <h2 id="input-title">投資プラン</h2>
+        <form id="plan">
+          <label for="initial">現在の投資資産</label><div class="field"><input id="initial" name="initial" type="number" min="0" step="any" value="1000000" required inputmode="decimal"><span>円</span></div>
+          <label for="monthly">毎月の積立額</label><div class="field"><input id="monthly" name="monthly" type="number" min="0" step="any" value="30000" required inputmode="decimal"><span>円</span></div>
+          <label for="bonus">年2回のボーナス投資額 <small>（1回あたり）</small></label><div class="field"><input id="bonus" name="bonus" type="number" min="0" step="any" value="100000" required inputmode="decimal"><span>円</span></div>
+          <label for="annualRate">想定年利</label><div class="field"><input id="annualRate" name="annualRate" type="number" min="0" max="100" step="any" value="5" required inputmode="decimal"><span>%</span></div>
+          <label for="target">目標金額</label><div class="field"><input id="target" name="target" type="number" min="0.01" step="any" value="10000000" required inputmode="decimal"><span>円</span></div>
+          <button type="submit">目標までの道のりを計算</button>
+          <p id="error" role="alert" hidden></p>
+        </form>
+      </section>
+      <section class="card results" aria-labelledby="result-title">
+        <h2 id="result-title">シミュレーション結果</h2>
+        <div id="summary" aria-live="polite" aria-atomic="true"></div>
+        <div class="chart-title"><h3>資産の推移</h3><span><i class="dot"></i>資産総額 <i class="dot principal"></i>投資元本</span></div>
+        <svg id="chart" viewBox="0 0 680 360" role="img" aria-labelledby="chart-heading chart-description"><title id="chart-heading">資産推移グラフ</title><desc id="chart-description"></desc></svg>
+        <p class="hint">横軸：経過年数 ／ 縦軸：資産額（万円）</p>
+      </section>
+    </div>
+    <section class="notes"><h2>計算について</h2><p>想定年利 ÷ 12 を毎月の利率として、月単位の複利で計算します。毎月末に運用益を反映し、その後に積立額を加算します。ボーナスは開始から6か月ごと（6・12・18か月目…）に加算します。</p><p>開始月はブラウザの現在年月です。最大100年まで試算します。税金・手数料・インフレは考慮していません。年利は一定と仮定した試算で、将来の運用成果を保証するものではありません。入力内容は保存・送信されません。</p></section>
+    <footer>一歩ずつ、未来の目標へ。</footer>
+  </main>
+</body>
+</html>
